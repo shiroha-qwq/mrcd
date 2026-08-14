@@ -261,14 +261,20 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     })
   },
-  enhanceApp({ router }) {
+  enhanceApp({ router, siteData }) {
     if (typeof window !== 'undefined') {
+      const base = siteData.value.base
+      const isHomePath = (p: string) =>
+        p === '/' ||
+        p === '/index.html' ||
+        p === base ||
+        p === `${base}index.html`
+
       router.onAfterRouteChange = (to) => {
         window.setTimeout(bindTilt, 0)
-        if (to === '/' || to === '/index.html') playHomeEnter()
+        if (isHomePath(to)) playHomeEnter()
       }
-      const path = window.location.pathname
-      if (path === '/' || path === '/index.html') playHomeEnter()
+      if (isHomePath(window.location.pathname)) playHomeEnter()
     }
   }
 } satisfies Theme
