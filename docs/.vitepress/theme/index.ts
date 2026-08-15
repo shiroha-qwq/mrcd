@@ -6,7 +6,7 @@ import './style.css'
 
 const maxFrame = 250
 const maxMove = 2
-const maxRotate = 0.5
+const maxRotate = 3
 const easing = 0.2
 const hoverScale = 1.03
 const pressScale = 0.97
